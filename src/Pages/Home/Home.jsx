@@ -1,8 +1,11 @@
 import React from 'react'
+import Homebaner from './Homebaner/Homebaner'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <>
+      <Homebaner/>
+    </>
   )
 }
 
