@@ -2,6 +2,7 @@ import React from 'react'
 import Homebaner from './Homebaner/Homebaner'
 import Homebed from './Homebedsection/Homebed'
 import Homeproduct from './Homeproduct/Homeproduct'
+import Homeroom from './Homeroom/Homeroom'
 
 const Home = () => {
   return (
@@ -9,6 +10,7 @@ const Home = () => {
       <Homebaner/>
       <Homebed/>
       <Homeproduct/>
+      <Homeroom/>
     </>
   )
 }
