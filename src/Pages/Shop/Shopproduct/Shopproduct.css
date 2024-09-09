@@ -73,3 +73,11 @@
     font-weight: 400;
     color: #B0B0B0;
 }
+
+.shopproduct-ps-box-flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 38px;
+    margin-top: 70px;
+}

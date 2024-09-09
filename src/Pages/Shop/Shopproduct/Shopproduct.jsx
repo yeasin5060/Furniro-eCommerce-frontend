@@ -9,6 +9,7 @@ import productsix from '../../../images/productsix.png';
 import productseven from '../../../images/productseven.png';
 import producteight from '../../../images/productone.png';
 import './Shopproduct.css'
+import Psbutton from '../../../Components/Psbutton/Psbutton';
 
 let shopProductArray = [
     {
@@ -166,6 +167,12 @@ const Shopproduct = () => {
                         ))
                     }
                 </div>
+            </div>
+            <div className='shopproduct-ps-box-flex'>
+                <Psbutton text='1'/>
+                <Psbutton text='2'/>
+                <Psbutton text='3'/>
+                <Psbutton text='next'/>
             </div>
         </div>
     </section>
