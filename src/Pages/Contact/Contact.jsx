@@ -1,10 +1,12 @@
 import React from 'react'
 import Contactbaner from './Contactbaner/Contactbaner'
+import Contactform from './Contactform/Contactform'
 
 const Contact = () => {
   return (
     <>
-    <Contactbaner/>
+      <Contactbaner/>
+      <Contactform/>
     </>
   )
 }
