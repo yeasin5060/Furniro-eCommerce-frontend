@@ -10,6 +10,7 @@ import productseven from '../../../images/productseven.png';
 import producteight from '../../../images/productone.png';
 import './Shopproduct.css'
 import Psbutton from '../../../Components/Psbutton/Psbutton';
+import { Link } from 'react-router-dom';
 
 let shopProductArray = [
     {
@@ -151,19 +152,21 @@ const Shopproduct = () => {
                     {
                         shopProductArray&&
                         shopProductArray.map((items)=> (
-                            <div key={items.id} className='shopproduct-img-container'>
-                                <div className='shopproduct-img-box'>
-                                    <img src={items.img} alt='not found' />
-                                </div>
-                                <div className='shopproduct-image-contant-box'>
-                                    <Heading level='h4' text={items.name} className='shopproduct-name'/>
-                                    <Heading level='h5' text={items.pera} className='shopproduct-pera'/>
-                                    <div className='shopproduct-price-box-flex'>
-                                        <Heading level='h5' text={items.newprice} className='shopproduct-newprice'/>
-                                        <Heading level='h5' text={items.oldprice} className='shopproduct-oldprice'/>
+                           <Link to ='/singleproduct'>
+                                <div key={items.id} className='shopproduct-img-container'>
+                                    <div className='shopproduct-img-box'>
+                                        <img src={items.img} alt='not found' />
                                     </div>
-                                </div>    
-                            </div>
+                                    <div className='shopproduct-image-contant-box'>
+                                        <Heading level='h4' text={items.name} className='shopproduct-name'/>
+                                        <Heading level='h5' text={items.pera} className='shopproduct-pera'/>
+                                        <div className='shopproduct-price-box-flex'>
+                                            <Heading level='h5' text={items.newprice} className='shopproduct-newprice'/>
+                                            <Heading level='h5' text={items.oldprice} className='shopproduct-oldprice'/>
+                                        </div>
+                                    </div>    
+                                </div>
+                           </Link>
                         ))
                     }
                 </div>

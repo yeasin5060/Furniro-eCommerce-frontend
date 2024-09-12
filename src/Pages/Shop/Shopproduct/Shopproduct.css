@@ -20,6 +20,7 @@
 .shopproduct-img-container{
     width: 285px;
     background: #F4F5F7;
+    cursor: pointer;
 }
 
 .shopproduct-img-box{
