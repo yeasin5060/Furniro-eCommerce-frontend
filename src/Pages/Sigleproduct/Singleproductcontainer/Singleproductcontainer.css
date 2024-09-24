@@ -1,6 +1,8 @@
 #singleproduct-container{
-    padding: 35px 0 0 55px;
+    padding: 35px 0 66px 0;
     background: #FFFFFF;
+    border-bottom: 1px solid #9F9F9F;
+
 }
 
 .singleproduct-container-flex{
