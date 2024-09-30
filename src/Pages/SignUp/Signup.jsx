@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { json, useNavigate } from 'react-router-dom';
 import Heading from '../../Utils/Heading/Heading';
 import Button from '../../Components/Button/Button';
 import { Oval } from 'react-loader-spinner';
 import img from '../../images/class-ecom-sign-img.jpg';
+import axios from 'axios';
 import './SignUp.css';
 
 
@@ -37,33 +38,38 @@ const emailregex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))
 //password regex
 const password_pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
 
-const signinBtn = (e)=>{
+const signinBtn = async (e)=>{
     e.preventDefault();
         //validation
     if(!signinData.userName){
-    setSendError({userName:"User Name is Require"})
+        setSendError({userName:"User Name is Require"})
     }else if(!signinData.email){
-    setSendError({userName: ""})
-    setSendError({email : "Email is Require"})
+        setSendError({userName: ""})
+        setSendError({email : "Email is Require"})
     }else if(!signinData.email.match(emailregex)){
-    setSendError({email: ""})
-    setSendError({email :"Inter valid Email"})
+        setSendError({email: ""})
+        setSendError({email :"Inter valid Email"})
     }else if(!signinData.password){
-    setSendError({email: ""})
-    setSendError({password : "Passowrd is Require"})
+        setSendError({email: ""})
+        setSendError({password : "Passowrd is Require"})
     }else if(!signinData.password.match(password_pattern)){
-    setSendError({password : ""})
-    setSendError({password : "Strong Password"})
+        setSendError({password : ""})
+        setSendError({password : "Strong Password"})
     }else if(!signinData.phoneNumber){
-    setSendError({password: ""})
-    setSendError({conpass:"Phone Number is Require"})
+        setSendError({password: ""})
+        setSendError({phoneNumber:"Phone Number is Require"})
     }else{
     // react loder true
     setLoder(true)
     setSendError({phoneNumber:""})
-
-        navigate('./login')
-
+    try {
+        const res =  await  axios.post("http://localhost:5000/api/v1/user/register" , signinData).then(()=>{
+              navigate("/")
+          })
+          console.log(res);
+      } catch (error) {
+          console.error("Error:", error);
+      }
     }
 }
 // react loder state

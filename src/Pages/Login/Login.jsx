@@ -13,13 +13,13 @@ const Login = () => {
 
     const [loginData , setLoginData] = useState({
         email : "",
-        password : ""
+        password : "",
     })
 
                 //this useState send the error when user empty the input box and press the login button;
     const [sendError , setSendError] = useState({
         email : "",
-        password : ""
+        password : "",
     }) 
 
     const handelform = (e)=>{
@@ -32,8 +32,6 @@ const Login = () => {
 
     const loginBtn = (e)=>{
         e.preventDefault();
-        //react loder ture
-        setReactLoder(true)
                 //validation
         if(!loginData.email){
             setSendError({email:"Email is Require"})
@@ -43,12 +41,20 @@ const Login = () => {
         }else if(!loginData.password){
             setSendError({password : "Password is Require"})
         }else{
+            setSendError({password:""})
+            //react loder ture
+            setReactLoder(true)
             navigate("/home")
+
+            setLoginData({
+                email : "",
+                password : "",
+                phoneNumber : ""
+            })  
         }
     }
-
-        //react loder
     let [ reactLoder , setReactLoder] = useState (false)
+        //react loder
   return (
     <section id='login-page'>
         <div className='login-page-wrapper'>
@@ -66,12 +72,12 @@ const Login = () => {
                     <form className='form-box'>
                         <Heading level='p' text="Email Address" className="email-style"/>
                         <div className='email-input-box'>
-                            <input className='email-input' type='email' placeholder='Enter your email' name="email" onChange={handelform}/>
+                            <input className='email-input' value={loginData.email} type='email' placeholder='Enter your email' name="email" onChange={handelform}/>
                             {sendError.email && <p className='lonin-error'>{sendError.email}</p>}
                         </div>
                         <Heading level='p' text="password" className="password-style"/>
                         <div className='password-input-box'>
-                            <input className='password-input' type='password' placeholder='Enter your password' name="password" onChange={handelform}/>
+                            <input className='password-input' value={loginData.password } type='password' placeholder='Enter your password' name="password" onChange={handelform}/>
                             {sendError.password && <p className='lonin-error'>{sendError.password}</p>}
                         </div>
                         <div className='forget-pass-box'>

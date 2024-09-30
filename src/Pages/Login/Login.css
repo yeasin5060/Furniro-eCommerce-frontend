@@ -195,3 +195,25 @@
 .oval{
     padding: 13px 0;
 }
+
+.signin-number-input-box{
+    width: 100%;
+}
+
+.signin-number-style{
+    font-size: 16px;
+    font-weight: 400;
+    color: #2c2c72;
+    line-height: 140%;
+    margin: 10px 0;
+}
+.signin-number-input{
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    padding: 10px 30px;
+    border: 1px solid #2c2c72;
+    outline: none;
+    border-radius: 10px;
+}
