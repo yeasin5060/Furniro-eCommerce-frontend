@@ -18,7 +18,7 @@ const Navbar = () => {
                 <div className='nav-pages-container'>
                     <ul className='nav-pages-items'>
                         <li>
-                            <Link to ='/'>home</Link>
+                            <Link to ='home'>home</Link>
                         </li>
                         <li>
                             <Link to ='shop'>shop</Link>

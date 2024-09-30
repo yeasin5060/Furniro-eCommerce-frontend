@@ -9,6 +9,8 @@ import Home from "./Pages/Home/Home";
 import Shop from "./Pages/Shop/Shop";
 import Contact from "./Pages/Contact/Contact";
 import Singleproduct from "./Pages/Sigleproduct/Singleproduct";
+import Signup from "./Pages/SignUp/Signup";
+import Login from "./Pages/Login/Login";
 
 
 
@@ -16,11 +18,15 @@ function App() {
  
   const router = createBrowserRouter(
     createRoutesFromElements(
-     <Route element ={<Main/>}>
-        <Route path="/" element = {<Home/>}/>
-        <Route path="/shop" element = {<Shop/>}/>
-        <Route path="/contact" element = {<Contact/>}/>
-        <Route path="/singleproduct" element = {<Singleproduct/>}/>
+     <Route>
+        <Route path="/" element = {<Signup/>}/>
+        <Route path="/login" element = {<Login/>}/>
+        <Route element ={<Main/>}>
+          <Route path="/home" element = {<Home/>}/>
+          <Route path="/shop" element = {<Shop/>}/>
+          <Route path="/contact" element = {<Contact/>}/>
+          <Route path="/singleproduct" element = {<Singleproduct/>}/>
+        </Route>
      </Route>
     )
   );
