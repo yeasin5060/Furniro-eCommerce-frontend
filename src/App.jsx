@@ -11,6 +11,7 @@ import Contact from "./Pages/Contact/Contact";
 import Singleproduct from "./Pages/Sigleproduct/Singleproduct";
 import Signup from "./Pages/SignUp/Signup";
 import Login from "./Pages/Login/Login";
+import Errorpage from "./Pages/Errorpage/Errorpage";
 
 
 
@@ -21,6 +22,7 @@ function App() {
      <Route>
         <Route path="/" element = {<Login/>}/>
         <Route path="/signup" element = {<Signup/>}/>
+        <Route path='*' element = {<Errorpage/>}/>
         <Route element ={<Main/>}>
           <Route path="/home" element = {<Home/>}/>
           <Route path="/shop" element = {<Shop/>}/>

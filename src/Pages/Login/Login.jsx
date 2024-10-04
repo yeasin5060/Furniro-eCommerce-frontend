@@ -6,6 +6,7 @@ import { Oval } from 'react-loader-spinner';
 import googlelogo from '../../images/google.svg';
 import img from '../../images/class-ecom-login-img.jpg';
 import './Login.css'
+import axios from 'axios';
 
 const Login = () => {
 
@@ -30,7 +31,7 @@ const Login = () => {
          //email regex
   const emailregex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ 
 
-    const loginBtn = (e)=>{
+    const loginBtn = async (e)=>{
         e.preventDefault();
                 //validation
         if(!loginData.email){
@@ -42,15 +43,31 @@ const Login = () => {
             setSendError({password : "Password is Require"})
         }else{
             setSendError({password:""})
-            //react loder ture
             setReactLoder(true)
-            navigate("/home")
+            //react loder ture
+            setTimeout(()=> {
+                setReactLoder(true)
+            } , 5000)
+            
+            try {
+                const response = await axios.post("http://localhost:5000/api/v1/user/login" ,loginData).then(() => {
+                    navigate("/home")
+                })
+                console.log(response);
+            } catch (error) {
+                console.log("login post error" , error.message);
+                
+            }
 
             setLoginData({
                 email : "",
                 password : "",
                 phoneNumber : ""
-            })  
+            });
+
+            setTimeout(()=> {
+                setReactLoder(false)
+            } , 5000);  
         }
     }
     let [ reactLoder , setReactLoder] = useState (false)
