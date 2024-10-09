@@ -12,6 +12,7 @@ import Singleproduct from "./Pages/Sigleproduct/Singleproduct";
 import Signup from "./Pages/SignUp/Signup";
 import Login from "./Pages/Login/Login";
 import Errorpage from "./Pages/Errorpage/Errorpage";
+import Forgetpassword from "./Pages/Forgetpassword/Forgetpassword";
 
 
 
@@ -22,6 +23,7 @@ function App() {
      <Route>
         <Route path="/" element = {<Login/>}/>
         <Route path="/signup" element = {<Signup/>}/>
+        <Route path="/forgetpass" element = {<Forgetpassword/>}/>
         <Route path='*' element = {<Errorpage/>}/>
         <Route element ={<Main/>}>
           <Route path="/home" element = {<Home/>}/>

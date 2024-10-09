@@ -51,12 +51,13 @@ const Login = () => {
             
             try {
                 const response = await axios.post("http://localhost:5000/api/v1/user/login" ,loginData).then(() => {
-                    navigate("/home")
+                    //navigate("/home")
+                }).then(()=> {
+                    //alert("you go to your mail and verify your email")
                 })
                 console.log(response);
             } catch (error) {
-                console.log("login post error" , error.message);
-                
+                console.log("login post error" , error.message); 
             }
 
             setLoginData({
@@ -98,7 +99,7 @@ const Login = () => {
                             {sendError.password && <p className='lonin-error'>{sendError.password}</p>}
                         </div>
                         <div className='forget-pass-box'>
-                            <Link className='forget-pass' to='forget'>Forget?</Link>
+                            <Link className='forget-pass' to='forgetpass'>Forget?</Link>
                         </div>
                         <div className='form-login-btn-box'>
                             {

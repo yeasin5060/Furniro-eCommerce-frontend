@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../../images/furniro logo.png';
+import logo from '../../images/furniro-logo.png';
 import { Link } from 'react-router-dom';
 import { RiAccountCircleLine } from "react-icons/ri";
 import { IoSearchOutline } from "react-icons/io5";
