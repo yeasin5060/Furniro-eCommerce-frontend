@@ -118,6 +118,7 @@
 }
 .password-input-box{
     width: 100%;
+    position: relative;
 }
 .password-input{
     width: 100%;
@@ -194,6 +195,18 @@
 }
 .oval{
     padding: 13px 0;
+}
+
+.login-open_eye {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+}
+
+.login-closs_eye{
+    position: absolute;
+    right:20px;
+    top: 12px;
 }
 
 .signin-number-input-box{

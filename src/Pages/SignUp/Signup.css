@@ -88,7 +88,11 @@
     line-height: 140%;
     margin: 10px 0;
 }
-.signin-password-input-box .signin-number-input-box{
+.signin-password-input-box{
+    width: 100%;
+    position: relative;
+}
+.signin-number-input-box{
     width: 100%;
 }
 .signin-password-input{
@@ -100,6 +104,17 @@
     border: 1px solid #2c2c72;
     outline: none;
     border-radius: 10px;
+}
+.signup-open_eye {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+}
+
+.signup-closs_eye{
+    position: absolute;
+    right:20px;
+    top: 12px;
 }
 .signin-image-box{
     width: 50%;

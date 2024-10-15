@@ -5,75 +5,79 @@ import Button from '../../Components/Button/Button';
 import { Oval } from 'react-loader-spinner';
 import img from '../../images/class-ecom-sign-img.jpg';
 import axios from 'axios';
+import { IoMdEye } from "react-icons/io";
+import { IoIosEyeOff } from "react-icons/io";
 import './SignUp.css';
 
 
 const Signup = () => {
     const navigate = useNavigate()
 
+    const [checktype , setChecktype] = useState(false);
+
     //this useState recive the signup data
-const [signinData , setSigninData] = useState({
-    userName : "",
-    email : "",
-    password : "",
-    phoneNumber : ""
-})
+    const [signinData , setSigninData] = useState({
+        userName : "",
+        email : "",
+        password : "",
+        phoneNumber : ""
+    });
 
     //this useState send the error when user empty the input box and press the login button;
-const [sendError , setSendError] = useState({
-    userName : "",
-    email : "",
-    password : "",
-    phoneNumber : ""
-}) 
+    const [sendError , setSendError] = useState({
+        userName : "",
+        email : "",
+        password : "",
+        phoneNumber : ""
+    });
 
-const handelform = (e)=>{
-    let {name , value} = e.target
-    setSigninData({...signinData,[name]:value})
-};
+    const handelform = (e)=>{
+        let {name , value} = e.target
+        setSigninData({...signinData,[name]:value})
+    };
 
 //email regex
-const emailregex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ 
+    const emailregex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ 
 
-//password regex
-const password_pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
+    //password regex
+    const password_pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
 
-const signinBtn = async (e)=>{
-    e.preventDefault();
-        //validation
-    if(!signinData.userName){
-        setSendError({userName:"User Name is Require"})
-    }else if(!signinData.email){
-        setSendError({userName: ""})
-        setSendError({email : "Email is Require"})
-    }else if(!signinData.email.match(emailregex)){
-        setSendError({email: ""})
-        setSendError({email :"Inter valid Email"})
-    }else if(!signinData.password){
-        setSendError({email: ""})
-        setSendError({password : "Passowrd is Require"})
-    }else if(!signinData.password.match(password_pattern)){
-        setSendError({password : ""})
-        setSendError({password : "Strong Password"})
-    }else if(!signinData.phoneNumber){
-        setSendError({password: ""})
-        setSendError({phoneNumber:"Phone Number is Require"})
-    }else{
-    // react loder true
-    setLoder(true)
-    setSendError({phoneNumber:""})
-    try {
-        const res =  await  axios.post("http://localhost:5000/api/v1/user/register" , signinData).then(()=>{
-              navigate("/")
-          })
-          console.log(res);
-      } catch (error) {
-          console.error("Error:", error);
-      }
+    const signinBtn = async (e)=>{
+        e.preventDefault();
+            //validation
+        if(!signinData.userName){
+            setSendError({userName:"User Name is Require"})
+        }else if(!signinData.email){
+            setSendError({userName: ""})
+            setSendError({email : "Email is Require"})
+        }else if(!signinData.email.match(emailregex)){
+            setSendError({email: ""})
+            setSendError({email :"Inter valid Email"})
+        }else if(!signinData.password){
+            setSendError({email: ""})
+            setSendError({password : "Passowrd is Require"})
+        }else if(!signinData.password.match(password_pattern)){
+            setSendError({password : ""})
+            setSendError({password : "Strong Password"})
+        }else if(!signinData.phoneNumber){
+            setSendError({password: ""})
+            setSendError({phoneNumber:"Phone Number is Require"})
+        }else{
+        // react loder true
+        setLoder(true)
+        setSendError({phoneNumber:""})
+        try {
+            const res =  await  axios.post("http://localhost:5000/api/v1/user/register" , signinData).then(()=>{
+                navigate("/")
+            })
+            console.log(res);
+        } catch (error) {
+            console.error("Error:", error);
+        }
+        }
     }
-}
-// react loder state
-let [loder , setLoder] = useState(false)
+    // react loder state
+    let [loder , setLoder] = useState(false);
   return (
     <section id='signin-page'>
         <div className='signin-page-wrapper'>
@@ -99,7 +103,15 @@ let [loder , setLoder] = useState(false)
                         </div>
                         <Heading level='p' text="password" className="signin-password-style"/>
                         <div className='signin-password-input-box'>
-                            <input className='signin-password-input' type='password' placeholder='Enter your password' name="password" onChange={handelform}/>
+                            <input className='signin-password-input' type={checktype ?'password':"text"} placeholder='Enter your password' name="password" onChange={handelform}/>
+
+                            {  
+                                checktype  
+                                ?
+                                <IoIosEyeOff className='signup-closs_eye' onClick={()=>{setChecktype(!checktype)}}/>
+                                :
+                                <IoMdEye className='signup-open_eye' onClick={()=>{setChecktype(!checktype)}} />
+                            }
                             {sendError.password && <p className='signin-lonin-error'>{sendError.password}</p>}
                         </div>
                         <Heading level='p' text="Phone Number" className="signin-number-style"/>

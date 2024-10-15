@@ -5,12 +5,16 @@ import Button from '../../Components/Button/Button';
 import { Oval } from 'react-loader-spinner';
 import googlelogo from '../../images/google.svg';
 import img from '../../images/class-ecom-login-img.jpg';
-import './Login.css'
 import axios from 'axios';
+import { IoMdEye } from "react-icons/io";
+import { IoIosEyeOff } from "react-icons/io";
+import './Login.css';
 
 const Login = () => {
 
     const navigate = useNavigate()
+
+    const [checktype , setChecktype] = useState(false)
 
     const [loginData , setLoginData] = useState({
         email : "",
@@ -94,7 +98,14 @@ const Login = () => {
                         </div>
                         <Heading level='p' text="password" className="password-style"/>
                         <div className='password-input-box'>
-                            <input className='password-input' value={loginData.password } type='password' placeholder='Enter your password' name="password" onChange={handelform}/>
+                            <input className='password-input' value={loginData.password } type={checktype ? "password" : "text"} placeholder='Enter your password' name="password" onChange={handelform}/>
+                            {  
+                                checktype  
+                                ?
+                                <IoIosEyeOff className='login-closs_eye' onClick={()=>{setChecktype(!checktype)}}/>
+                                :
+                                <IoMdEye className='login-open_eye' onClick={()=>{setChecktype(!checktype)}} />
+                            }
                             {sendError.password && <p className='lonin-error'>{sendError.password}</p>}
                         </div>
                         <div className='forget-pass-box'>

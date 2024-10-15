@@ -6,9 +6,14 @@ import { IoIosArrowBack } from "react-icons/io";
 import { Oval } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { IoMdEye } from "react-icons/io";
+import { IoIosEyeOff } from "react-icons/io";
 import './Forgetpassword.css';
 
 const Forgetpassword = () => {
+
+    const [reactLoder , setReactLoder] = useState(false);
+    const [checktype , setChecktype] = useState(false)
 
     const [forgetData , setForgetData] = useState({
         email : "",
@@ -57,7 +62,6 @@ const Forgetpassword = () => {
         };
     }; 
 
-    const [reactLoder , setReactLoder] = useState(false);
   return (
     <div id = 'forgetpassword'>
         <div className='container'>
@@ -80,7 +84,14 @@ const Forgetpassword = () => {
                     </div>
                     <Heading level='p' text='New Password' className="forgetpass-pass-style"/>
                     <div className='forgetpass-newpass-input-box'>
-                        <input className='forgetpass-newpass-input' type='password' placeholder='Enter your new password' name="newpassword"  onChange={handleData}/>
+                        <input className='forgetpass-newpass-input' type={checktype ? "password" : "text"} placeholder='Enter your new password' name="newpassword"  onChange={handleData}/>
+                        {  
+                            checktype  
+                            ?
+                            <IoIosEyeOff className='forget-closs_eye' onClick={()=>{setChecktype(!checktype)}}/>
+                            :
+                            <IoMdEye className='forget-open_eye' onClick={()=>{setChecktype(!checktype)}} />
+                        }
                         {error.newpassword && <p className='lonin-error'>{error.newpassword}</p>}
                     </div>
                     <div className='forgetpass-button-box'>
