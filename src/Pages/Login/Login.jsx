@@ -43,7 +43,6 @@ const Login = () => {
             setSendError({password : "Password is Require"})
         }else{
             setSendError({password:""})
-            setReactLoder(true)
             //react loder ture
             setTimeout(()=> {
                 setReactLoder(true)
