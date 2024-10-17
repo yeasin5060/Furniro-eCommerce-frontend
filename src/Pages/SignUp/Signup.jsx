@@ -7,7 +7,7 @@ import img from '../../images/class-ecom-sign-img.jpg';
 import axios from 'axios';
 import { IoMdEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
-import './SignUp.css';
+import './Signup.css';
 
 
 const Signup = () => {
