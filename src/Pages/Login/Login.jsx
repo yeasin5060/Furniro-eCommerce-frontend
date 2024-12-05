@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Heading from '../../Utils/Heading/Heading';
 import Button from '../../Components/Button/Button';
@@ -8,6 +8,7 @@ import img from '../../images/class-ecom-login-img.jpg';
 import axios from 'axios';
 import { IoMdEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
+import Cookies from 'js-cookie';
 import './Login.css';
 
 const Login = () => {
@@ -48,31 +49,25 @@ const Login = () => {
         }else{
             setSendError({password:""})
             //react loder ture
-            setTimeout(()=> {
-                setReactLoder(true)
-            } , 5000)
-            
+            setReactLoder(true)
             try {
-                const response = await axios.post("http://localhost:5000/api/v1/user/login" ,loginData).then(() => {
-                    //navigate("/home")
-                }).then(()=> {
-                    //alert("you go to your mail and verify your email")
-                })
-                console.log(response);
+                const response = await axios.post("http://localhost:5000/api/v1/user/login" ,loginData)
+               /* console.log(response);
+                Cookies.set("accessToken" , response.data.data.accessToken,{expires:1});
+                useEffect(()=> {
+                    if(Cookies.get("accessToken")){
+                        navigate("/home")
+                    }
+                },[]);*/
+                
             } catch (error) {
                 console.log("login post error" , error.message); 
-            }
-
-            setLoginData({
-                email : "",
-                password : "",
-                phoneNumber : ""
-            });
-
-            setTimeout(()=> {
-                setReactLoder(false)
-            } , 5000);  
+            } 
         }
+        setTimeout(()=> {
+            setReactLoder(false)
+        } , 5000)
+        
     }
     let [ reactLoder , setReactLoder] = useState (false)
         //react loder

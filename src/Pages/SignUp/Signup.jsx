@@ -67,9 +67,8 @@ const Signup = () => {
         setLoder(true)
         setSendError({phoneNumber:""})
         try {
-            const res =  await  axios.post("http://localhost:5000/api/v1/user/register" , signinData).then(()=>{
-                navigate("/")
-            })
+            const res = await axios.post("http://localhost:5000/api/v1/user/register" , signinData);
+            navigate("/")
             console.log(res);
         } catch (error) {
             console.error("Error:", error);

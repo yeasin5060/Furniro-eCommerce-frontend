@@ -59,3 +59,14 @@
     align-items: center;
     justify-content: center;
 }
+
+.nav-login{
+    font-size: 18px;
+    font-weight: 600;
+    color: #FFFFFF;
+    padding : 10px 20px;
+    background:#418b16; ;
+    border-radius: 10px;
+    cursor: pointer;
+    text-transform: capitalize;
+}

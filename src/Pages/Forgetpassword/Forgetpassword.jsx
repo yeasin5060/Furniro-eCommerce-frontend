@@ -4,13 +4,15 @@ import logo from '../../images/furniro-logo.png';
 import forgetlogo from '../../images/forgetpass-icon.jpg';
 import { IoIosArrowBack } from "react-icons/io";
 import { Oval } from 'react-loader-spinner';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { IoMdEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
 import './Forgetpassword.css';
 
 const Forgetpassword = () => {
+
+    const navigate = useNavigate()
 
     const [reactLoder , setReactLoder] = useState(false);
     const [checktype , setChecktype] = useState(false)
@@ -53,13 +55,16 @@ const Forgetpassword = () => {
 
             try {
                 const response = await axios.post("http://localhost:5000/api/v1/user/forget/password" , forgetData).then(()=> {
-                    setReactLoder(false);
-                    console.log(response);
+                    navigate("/");
+                    alert("your password chenge successfully");
                 });
             } catch (error) {
                 console.log("forget password send errror", error.message);
             };
         };
+        setTimeout(()=> {
+            setReactLoder(false);
+        } , 5000)
     }; 
 
   return (

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useSyncExternalStore } from 'react';
 import Heading from '../../../Utils/Heading/Heading';
 import Sizebutton from '../../../Components/Sizebutton/Sizebutton';
 import Colorbox from '../../../Components/Colorbox/Colorbox';
@@ -13,6 +13,7 @@ import simgfour from '../../../images/product-small-img-four.png';
 import bimg from '../../../images/product-big-img.png';
 import { FaRegStar } from "react-icons/fa";
 import './Singleproductcontainer.css'
+import { useSelector } from 'react-redux';
 
 let productArray = [
     {
@@ -35,13 +36,39 @@ let productArray = [
 ]
 
 const Singleproductcontainer = () => {
+    const [quntity , setQuntity] = useState(1)
+
+    const increment = ()=> {  
+        if(quntity < 5){
+            setQuntity(quntity + 1)
+            console.log(quntity);
+            
+        }
+        else{
+            setQuntity( 5 )
+        }
+    }
+    const decrement = ()=> {
+       if (quntity > 1) {
+            setQuntity(quntity -1 )
+            console.log(quntity);
+       }else{
+        setQuntity( 1 )
+       };
+    };
+
+    const data = useSelector((state) => state.singleProduct.value);
+
+    console.log(data);
+    
+
   return (
     <section id = 'singleproduct-container'>
         <div className='container'>
             {
                 productArray &&
                 productArray.map( (items) => (
-                    <div key={items.id} className='singleproduct-container-flex'>
+                    <div key ={items.id} className='singleproduct-container-flex'>
                         <div className='singleproduct-container-images-box-flex'>
                             <div className='singleproduct-container-small-images-box-flex'>
                                 <div className='singleproduct-container-small-box'>
@@ -58,12 +85,12 @@ const Singleproductcontainer = () => {
                                 </div>
                             </div>
                             <div className='singleproduct-container-big-images-box'>
-                                <img src={items.bigimg} alt="not found" />
+                                <img src={data.img} alt="not found" />
                             </div>
                         </div>
                         <div className='singleproduct-container-contant-box'>
-                            <Heading level='h2' text={items.name} className='singleproduct-container-contant-head'/>
-                            <Heading level='h4' text={items.price} className='singleproduct-container-contant-price'/>
+                            <Heading level='h2' text={data.name} className='singleproduct-container-contant-head'/>
+                            <Heading level='h4' text={data.newprice} className='singleproduct-container-contant-price'/>
                             <div className='singleproduct-conatiner-star-box-flex'>
                                 <div className='singleproduct-container-star-box'>
                                     <FaRegStar />
@@ -91,9 +118,9 @@ const Singleproductcontainer = () => {
                             </div>
                             <div className='singleproduct-container-cart-box-flex'>
                                 <div className="singleproduct-container-cound-box-flex">
-                                    <button > - </button>
-                                    <Heading level= 'p' text='1' className='singleproduct-container-cound'/>
-                                    <button> + </button>
+                                    <button onClick={decrement} > - </button>
+                                    <Heading level= 'p' text={quntity} className='singleproduct-container-cound'/>
+                                    <button onClick={increment}> + </button>
                                 </div>
                                 <div className="singleproduct-container-add-box">
                                     <button className='singleproduct-container-add-cart-btn'>add to cart</button>

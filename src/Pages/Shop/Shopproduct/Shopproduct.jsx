@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Heading from '../../../Utils/Heading/Heading';
 import productone from '../../../images/productone.png';
 import producttwo from '../../../images/producttwo.png';
@@ -10,7 +10,9 @@ import productseven from '../../../images/productseven.png';
 import producteight from '../../../images/productone.png';
 import './Shopproduct.css'
 import Psbutton from '../../../Components/Psbutton/Psbutton';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { singleProductData } from '../../../Redux/singleProductSlice';
+import { useNavigate } from 'react-router-dom';
 
 let shopProductArray = [
     {
@@ -142,18 +144,34 @@ let shopProductArray = [
         oldprice : "Rp 3.500.000"
     },
 ]
-
 const Shopproduct = () => {
+    const [allProduct , setAllProduct] = useState()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    useEffect(()=>{
+        setAllProduct(shopProductArray)
+    },[])
+    //console.log(allProduct);
+
+    const handleCart = (item) => {
+        try {
+            dispatch(singleProductData(item))
+            navigate('/singleproduct')
+        } catch (error) {
+            console.log('single product data' , error.message); 
+        }
+   }
+   
   return (
     <section id='shopproduct'>
         <div className='container'>
             <div className='shopproduct-contant-wrapper'>
                 <div className='shopproduct-images-container-flex'>
                     {
-                        shopProductArray&&
-                        shopProductArray.map((items)=> (
-                           <Link to ='/singleproduct'>
-                                <div key={items.id} className='shopproduct-img-container'>
+                        allProduct&&
+                        allProduct.map((items)=> (
+                           <button  key={items.id} className='shopproduct-btn' onClick={()=>handleCart(items)}>
+                                <div className='shopproduct-img-container'>
                                     <div className='shopproduct-img-box'>
                                         <img src={items.img} alt='not found' />
                                     </div>
@@ -166,7 +184,7 @@ const Shopproduct = () => {
                                         </div>
                                     </div>    
                                 </div>
-                           </Link>
+                           </button>
                         ))
                     }
                 </div>

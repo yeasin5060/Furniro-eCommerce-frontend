@@ -18,7 +18,7 @@ const Navbar = () => {
                 <div className='nav-pages-container'>
                     <ul className='nav-pages-items'>
                         <li>
-                            <Link to ='home'>home</Link>
+                            <Link to ='/'>home</Link>
                         </li>
                         <li>
                             <Link to ='shop'>shop</Link>
@@ -32,18 +32,21 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className='nav-icons-container'>
-                    <div className='nav-icon-box'>
+                    <Link className='nav-icon-box' to = "userprofile">
                         <RiAccountCircleLine />
-                    </div>
-                    <div className='nav-icon-box'>
+                    </Link>
+                    <Link className='nav-icon-box' to = "search">
                         <IoSearchOutline />
-                    </div>
-                    <div className='nav-icon-box'>
+                    </Link>
+                    <Link className='nav-icon-box' to ="heart">
                         <FaRegHeart />
-                    </div>
-                    <div className='nav-icon-box'>
+                    </Link>
+                    <Link className='nav-icon-box' to = "cart">
                         <BsCart3 />
-                    </div>
+                    </Link>
+                    <Link className='nav-login' to = "login">
+                       Login
+                    </Link>
                 </div>
             </div>
         </div>

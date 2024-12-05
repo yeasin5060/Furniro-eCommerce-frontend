@@ -8,6 +8,12 @@
     width: 100%;
 }
 
+.shopproduct-btn{
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
 .shopproduct-images-container-flex{
     display: flex;
     align-items: center;

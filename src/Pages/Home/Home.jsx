@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Homebaner from './Homebaner/Homebaner'
 import Homebed from './Homebedsection/Homebed'
 import Homeproduct from './Homeproduct/Homeproduct'
