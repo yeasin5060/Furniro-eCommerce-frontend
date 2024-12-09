@@ -7,11 +7,16 @@ import img from '../../images/class-ecom-sign-img.jpg';
 import axios from 'axios';
 import { IoMdEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
+import { emailregex } from '../../Components/Components';
+import { password_pattern } from '../../Components/Components';
 import './Signup.css';
+import { useRegisterMutation } from '../../Redux/apiSlice';
 
 
 const Signup = () => {
     const navigate = useNavigate()
+ 
+    const [register , {data , isLoading , isError , error}] = useRegisterMutation()
 
     const [checktype , setChecktype] = useState(false);
 
@@ -36,12 +41,6 @@ const Signup = () => {
         setSigninData({...signinData,[name]:value})
     };
 
-//email regex
-    const emailregex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ 
-
-    //password regex
-    const password_pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/;
-
     const signinBtn = async (e)=>{
         e.preventDefault();
             //validation
@@ -64,19 +63,24 @@ const Signup = () => {
             setSendError({phoneNumber:"Phone Number is Require"})
         }else{
         // react loder true
-        setLoder(true)
         setSendError({phoneNumber:""})
         try {
-            const res = await axios.post("http://localhost:5000/api/v1/user/register" , signinData);
-            navigate("/")
+            const res = await register(signinData)
             console.log(res);
+            
+            if(res.data.status == 400){
+                return alert(res.data.message)
+            }
+            if(!(isLoading && isError)){
+               navigate("/login")
+            }else{
+                navigate(`/verified/${res.data.data.email}`)
+            }
         } catch (error) {
             console.error("Error:", error);
         }
         }
     }
-    // react loder state
-    let [loder , setLoder] = useState(false);
   return (
     <section id='signin-page'>
         <div className='signin-page-wrapper'>
@@ -115,12 +119,12 @@ const Signup = () => {
                         </div>
                         <Heading level='p' text="Phone Number" className="signin-number-style"/>
                         <div className='signin-number-input-box'>
-                            <input className='signin-number-input' type='password' placeholder='Enter your Phone Number' name="phoneNumber" onChange={handelform}/>
+                            <input className='signin-number-input' type='tel' placeholder='Enter your Phone Number' name="phoneNumber" onChange={handelform}/>
                             {sendError.phoneNumber && <p className='signin-lonin-error'>{sendError.phoneNumber}</p>}
                         </div>
                         <div className='signin-form-signin-btn-box'>
                             {
-                                loder
+                                isLoading
                                 ?
                                 (<Oval
                                     visible={true}

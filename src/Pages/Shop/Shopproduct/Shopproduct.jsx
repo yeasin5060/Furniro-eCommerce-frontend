@@ -10,8 +10,6 @@ import productseven from '../../../images/productseven.png';
 import producteight from '../../../images/productone.png';
 import './Shopproduct.css'
 import Psbutton from '../../../Components/Psbutton/Psbutton';
-import { useDispatch } from 'react-redux';
-import { singleProductData } from '../../../Redux/singleProductSlice';
 import { useNavigate } from 'react-router-dom';
 
 let shopProductArray = [
@@ -146,21 +144,11 @@ let shopProductArray = [
 ]
 const Shopproduct = () => {
     const [allProduct , setAllProduct] = useState()
-    const dispatch = useDispatch()
     const navigate = useNavigate()
     useEffect(()=>{
         setAllProduct(shopProductArray)
     },[])
     //console.log(allProduct);
-
-    const handleCart = (item) => {
-        try {
-            dispatch(singleProductData(item))
-            navigate('/singleproduct')
-        } catch (error) {
-            console.log('single product data' , error.message); 
-        }
-   }
    
   return (
     <section id='shopproduct'>

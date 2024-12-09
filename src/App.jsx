@@ -14,6 +14,7 @@ import Login from "./Pages/Login/Login";
 import Errorpage from "./Pages/Errorpage/Errorpage";
 import Forgetpassword from "./Pages/Forgetpassword/Forgetpassword";
 import Cart from "./Pages/Cart/Cart";
+import Verified from "./Pages/Verified";
 
 
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/contact" element = {<Contact/>}/>
           <Route path="/singleproduct" element = {<Singleproduct/>}/>
           <Route path="/cart" element = {<Cart/>}/>
+          <Route path="/verified/:email" element = {<Verified/>}/>
         </Route>
      </Route>
     )

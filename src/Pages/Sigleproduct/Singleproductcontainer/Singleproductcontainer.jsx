@@ -57,10 +57,6 @@ const Singleproductcontainer = () => {
        };
     };
 
-    const data = useSelector((state) => state.singleProduct.value);
-
-    console.log(data);
-    
 
   return (
     <section id = 'singleproduct-container'>
@@ -85,12 +81,12 @@ const Singleproductcontainer = () => {
                                 </div>
                             </div>
                             <div className='singleproduct-container-big-images-box'>
-                                <img src={data.img} alt="not found" />
+                                <img src={items.bigimg} alt="not found" />
                             </div>
                         </div>
                         <div className='singleproduct-container-contant-box'>
-                            <Heading level='h2' text={data.name} className='singleproduct-container-contant-head'/>
-                            <Heading level='h4' text={data.newprice} className='singleproduct-container-contant-price'/>
+                            <Heading level='h2' text={items.name} className='singleproduct-container-contant-head'/>
+                            <Heading level='h4' text={items.price} className='singleproduct-container-contant-price'/>
                             <div className='singleproduct-conatiner-star-box-flex'>
                                 <div className='singleproduct-container-star-box'>
                                     <FaRegStar />

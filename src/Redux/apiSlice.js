@@ -3,20 +3,27 @@ import { createApi , fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const furniroeCom = createApi({
     reducerPath : "api",
     baseQuery : fetchBaseQuery({
-       baseUrl : import.meta.env.React_Api_BaseUrl
+       baseUrl : import.meta.env.VITE_API_URL
     }),
     endpoints : (builder) => ({
-        singleproduct : builder.mutation({
-            query : (item) => ({
-                url: "/shop",
+        register : builder.mutation({
+            query : (data) => ({
+                url: "/users/register",
                 method: "POST", // Specify the HTTP method
                 headers: {
                 "Content-Type": "application/json", // Optional: depends on your backend
                 },
-                body: item, // Include the payload
+                body: data, // Include the payload
+            })
+        }),
+        resendMail : builder.mutation({
+            query : (data) => ({
+                url : "/users/resendmail",
+                method : "POST",
+                body : data
             })
         })
     })
 })
 
-export const {useSingleproductMutation} = furniroeCom
+export const {useRegisterMutation,useResendMailMutation} = furniroeCom
