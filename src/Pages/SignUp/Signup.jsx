@@ -67,7 +67,6 @@ const Signup = () => {
         try {
             const res = await register(signinData)
             console.log(res);
-            
             if(res.data.status == 400){
                 return alert(res.data.message)
             }

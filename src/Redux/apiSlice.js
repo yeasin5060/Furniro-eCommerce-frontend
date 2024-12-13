@@ -16,6 +16,13 @@ export const furniroeCom = createApi({
                 body: data, // Include the payload
             })
         }),
+        login : builder.mutation({
+            query : (data) => ({
+                url: "/users/login",
+                method: "POST", // Specify the HTTP method
+                body: data, // Include the payload
+            })
+        }),
         resendMail : builder.mutation({
             query : (data) => ({
                 url : "/users/resendmail",
@@ -26,4 +33,4 @@ export const furniroeCom = createApi({
     })
 })
 
-export const {useRegisterMutation,useResendMailMutation} = furniroeCom
+export const {useRegisterMutation,useResendMailMutation,useLoginMutation} = furniroeCom

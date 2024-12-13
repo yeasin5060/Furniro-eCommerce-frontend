@@ -5,15 +5,18 @@ import Button from '../../Components/Button/Button';
 import { Oval } from 'react-loader-spinner';
 import googlelogo from '../../images/google.svg';
 import img from '../../images/class-ecom-login-img.jpg';
-import axios from 'axios';
 import { IoMdEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
 import Cookies from 'js-cookie';
+import { emailregex } from '../../Components/Components';
 import './Login.css';
+import { useLoginMutation } from '../../Redux/apiSlice';
 
 const Login = () => {
 
     const navigate = useNavigate()
+
+    const [login , {isLoading , isError , error}] =  useLoginMutation()
 
     const [checktype , setChecktype] = useState(false)
 
@@ -33,8 +36,6 @@ const Login = () => {
         setLoginData({...loginData,[name]:value})
     }
 
-         //email regex
-  const emailregex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ 
 
     const loginBtn = async (e)=>{
         e.preventDefault();
@@ -48,29 +49,27 @@ const Login = () => {
             setSendError({password : "Password is Require"})
         }else{
             setSendError({password:""})
-            //react loder ture
-            setReactLoder(true)
             try {
-                const response = await axios.post("http://localhost:5000/api/v1/user/login" ,loginData)
-               /* console.log(response);
-                Cookies.set("accessToken" , response.data.data.accessToken,{expires:1});
-                useEffect(()=> {
+                const res = await login(loginData)
+                const data = res.data
+                if(data.statuscode === 400){
+                    return alert (data.message)
+                }
+                if(data.statuscode === 500){
+                    return alert (data.message)
+                }
+                console.log(data);
+                Cookies.set("accessToken" , data.data.accessToken,{expires:1});
+               
                     if(Cookies.get("accessToken")){
-                        navigate("/home")
+                        navigate("/")
                     }
-                },[]);*/
                 
             } catch (error) {
                 console.log("login post error" , error.message); 
             } 
         }
-        setTimeout(()=> {
-            setReactLoder(false)
-        } , 5000)
-        
     }
-    let [ reactLoder , setReactLoder] = useState (false)
-        //react loder
   return (
     <section id='login-page'>
         <div className='login-page-wrapper'>
@@ -108,7 +107,7 @@ const Login = () => {
                         </div>
                         <div className='form-login-btn-box'>
                             {
-                                reactLoder
+                                isLoading
                                 ?
                                 (<Oval
                                     visible={true}
